@@ -1,8 +1,23 @@
 #cloud-config
- users:
+users:
   - name: mashkov
     groups: sudo
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDX32MET5NOchUZUJQs/uJYgcKIKnUhkbppu26oCpo2554qrC8s0yKdIzyRbon8Paa2+SwapWkht2CP2tbGBxq+eF46WAvYTx9heiXzqYQB18vTAQLRVQt6qoI1qNaU2oivv2rRsY11b1awg5PwSMi6JCV8iUY0fKnIoChUIopVo6Ymf39DpoacK9mMCEJ5biHpuPB+zyttmkhi2p6623bO8RhbY+lUSCaMHKQZ5JDwJbHwx+wlbTab7HuqvVLlp+a87AgbH3DsVADhN1iLsEY6QzSs2iMxbdm7CRI+wUnPJHWaQ4qxs7JfGD1K8pOF/BrpHW9zdrzwClwtCwC/+hAi5pUfj/dz80MOkxlWUbgZ2NSNVZvTS+juq8qpSWK4qwiabEopuWghleBZdygYJZxHnjXt6ac4UK2XSFeW5xvTEwFpQDuG0tWGBcka7Iw1WvBP6dJb9ZY0tlMBY5wUAlhs8tTk64ZYJYJokU511qWgePPoOJ0KzAj8pQUMcKhXg5U= mashkov@debian
+
+disable_root: true
+timezone: Europe/Moscow
+repo_update: true
+repo_upgrade: true
+apt:
+  preserve_sources_list: true
+packages:
+  - nginx
+runcmd:
+  - [ systemctl, nginx-reload ]
+  - [ systemctl, enable, nginx.service ]
+  - [ systemctl, start, --no-block, nginx.service ]
+  - [ sh, -c, "echo $(hostname | cut -d '.' -f 1 ) > /var/www/html/index.html" ]
+  - [ sh, -c, "echo $(ip add ) >> /var/www/html/index.html" ]

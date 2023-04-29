@@ -38,7 +38,7 @@ resource "yandex_compute_instance" "vm" {
   }
 
   metadata = {
-    ssh-keys = "${file("./main.yaml")}"
+    user-data = file("./main.yaml")
   }
 
   scheduling_policy {
@@ -57,6 +57,7 @@ resource "yandex_vpc_subnet" "subnet-1" {
   network_id     = "${yandex_vpc_network.network-1.id}"
 }
 
+#Создание целевой группы Network Load Balancer
 resource "yandex_lb_target_group" "target-1" {
   name      = "target1"
   target {
@@ -69,6 +70,7 @@ resource "yandex_lb_target_group" "target-1" {
   }
 }
 
+#Создание сетевого балансировщика
 resource "yandex_lb_network_load_balancer" "lb-1" {
   name = "lb1"
   listener {
@@ -88,4 +90,10 @@ resource "yandex_lb_network_load_balancer" "lb-1" {
       }
     }
   }
+}
+
+#Создание снимка
+resource "yandex_compute_snapshot" "snapshot-1" {
+  name           = "disk-snapshot1"
+  source_disk_id = "yandex_compute_instance.vm[0].boot_disk[0].disk_id"
 }
