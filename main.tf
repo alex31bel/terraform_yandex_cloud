@@ -62,11 +62,11 @@ resource "yandex_lb_target_group" "target-1" {
   name      = "target1"
   target {
     subnet_id = "yandex_vpc_subnet.subnet-1.id"
-    address   = "yandex_compute_instance.vm[0].network_interface.0.ip_address"
+    address   = "${yandex_compute_instance.vm[0].network_interface.0.ip_address}"
   }
   target {
     subnet_id = "yandex_vpc_subnet.subnet-1.id"
-    address   = "yandex_compute_instance.vm[1].network_interface.0.ip_address"
+    address   = "${yandex_compute_instance.vm[1].network_interface.0.ip_address}"
   }
 }
 
