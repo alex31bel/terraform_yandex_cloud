@@ -59,7 +59,7 @@ resource "yandex_vpc_subnet" "subnet-1" {
 
 #Создание целевой группы Network Load Balancer
 resource "yandex_lb_target_group" "target-1" {
-  name      = "target1"
+  name      = "target-1"
   target {
     subnet_id = "yandex_vpc_subnet.subnet-1.id"
     address   = "${yandex_compute_instance.vm[0].network_interface.0.ip_address}"
@@ -72,7 +72,7 @@ resource "yandex_lb_target_group" "target-1" {
 
 #Создание сетевого балансировщика
 resource "yandex_lb_network_load_balancer" "lb-1" {
-  name = "lb1"
+  name = "lb-1"
   listener {
     name = "my-list"
     port = 80
@@ -94,6 +94,6 @@ resource "yandex_lb_network_load_balancer" "lb-1" {
 
 #Создание снимка
 resource "yandex_compute_snapshot" "snapshot-1" {
-  name           = "disk-snapshot1"
+  name           = "snapshot-1"
   source_disk_id = "yandex_compute_instance.vm[0].boot_disk[0].disk_id"
 }
