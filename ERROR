@@ -1,0 +1,291 @@
+mashkov@debian:~/terraform_yandex_cloud$ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm[0] will be created
+  + resource "yandex_compute_instance" "vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + metadata                  = {
+          + "user-data" = <<-EOT
+                #cloud-config
+                users:
+                  - name: mashkov
+                    groups: sudo
+                    shell: /bin/bash
+                    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                    ssh-authorized-keys:
+                      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDX32MET5NOchUZUJQs/uJYgcKIKnUhkbppu26oCpo2554qrC8s0yKdIzyRbon8Paa2+SwapWkht2CP2tbGBxq+eF46WAvYTx9heiXzqYQB18vTAQLRVQt6qoI1qNaU2oivv2rRsY11b1awg5PwSMi6JCV8iUY0fKnIoChUIopVo6Ymf39DpoacK9mMCEJ5biHpuPB+zyttmkhi2p6623bO8RhbY+lUSCaMHKQZ5JDwJbHwx+wlbTab7HuqvVLlp+a87AgbH3DsVADhN1iLsEY6QzSs2iMxbdm7CRI+wUnPJHWaQ4qxs7JfGD1K8pOF/BrpHW9zdrzwClwtCwC/+hAi5pUfj/dz80MOkxlWUbgZ2NSNVZvTS+juq8qpSWK4qwiabEopuWghleBZdygYJZxHnjXt6ac4UK2XSFeW5xvTEwFpQDuG0tWGBcka7Iw1WvBP6dJb9ZY0tlMBY5wUAlhs8tTk64ZYJYJokU511qWgePPoOJ0KzAj8pQUMcKhXg5U= mashkov@debian
+
+                disable_root: true
+                timezone: Europe/Moscow
+                repo_update: true
+                repo_upgrade: true
+                apt:
+                  preserve_sources_list: true
+                packages:
+                  - nginx
+                runcmd:
+                  - [ systemctl, nginx-reload ]
+                  - [ systemctl, enable, nginx.service ]
+                  - [ systemctl, start, --no-block, nginx.service ]
+                  - [ sh, -c, "echo $(hostname | cut -d '.' -f 1 ) > /var/www/html/index.html" ]
+                  - [ sh, -c, "echo $(ip add ) >> /var/www/html/index.html" ]
+            EOT
+        }
+      + name                      = "vm0"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v3"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8o41nbel1uqngk0op2"
+              + name        = (known after apply)
+              + size        = 3
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 1
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_instance.vm[1] will be created
+  + resource "yandex_compute_instance" "vm" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + metadata                  = {
+          + "user-data" = <<-EOT
+                #cloud-config
+                users:
+                  - name: mashkov
+                    groups: sudo
+                    shell: /bin/bash
+                    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                    ssh-authorized-keys:
+                      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDX32MET5NOchUZUJQs/uJYgcKIKnUhkbppu26oCpo2554qrC8s0yKdIzyRbon8Paa2+SwapWkht2CP2tbGBxq+eF46WAvYTx9heiXzqYQB18vTAQLRVQt6qoI1qNaU2oivv2rRsY11b1awg5PwSMi6JCV8iUY0fKnIoChUIopVo6Ymf39DpoacK9mMCEJ5biHpuPB+zyttmkhi2p6623bO8RhbY+lUSCaMHKQZ5JDwJbHwx+wlbTab7HuqvVLlp+a87AgbH3DsVADhN1iLsEY6QzSs2iMxbdm7CRI+wUnPJHWaQ4qxs7JfGD1K8pOF/BrpHW9zdrzwClwtCwC/+hAi5pUfj/dz80MOkxlWUbgZ2NSNVZvTS+juq8qpSWK4qwiabEopuWghleBZdygYJZxHnjXt6ac4UK2XSFeW5xvTEwFpQDuG0tWGBcka7Iw1WvBP6dJb9ZY0tlMBY5wUAlhs8tTk64ZYJYJokU511qWgePPoOJ0KzAj8pQUMcKhXg5U= mashkov@debian
+
+                disable_root: true
+                timezone: Europe/Moscow
+                repo_update: true
+                repo_upgrade: true
+                apt:
+                  preserve_sources_list: true
+                packages:
+                  - nginx
+                runcmd:
+                  - [ systemctl, nginx-reload ]
+                  - [ systemctl, enable, nginx.service ]
+                  - [ systemctl, start, --no-block, nginx.service ]
+                  - [ sh, -c, "echo $(hostname | cut -d '.' -f 1 ) > /var/www/html/index.html" ]
+                  - [ sh, -c, "echo $(ip add ) >> /var/www/html/index.html" ]
+            EOT
+        }
+      + name                      = "vm1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v3"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8o41nbel1uqngk0op2"
+              + name        = (known after apply)
+              + size        = 3
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 20
+          + cores         = 1
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = true
+        }
+    }
+
+  # yandex_compute_snapshot.snapshot-1 will be created
+  + resource "yandex_compute_snapshot" "snapshot-1" {
+      + created_at     = (known after apply)
+      + disk_size      = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + name           = "snapshot1"
+      + source_disk_id = (known after apply)
+      + storage_size   = (known after apply)
+    }
+
+  # yandex_lb_network_load_balancer.lb-1 will be created
+  + resource "yandex_lb_network_load_balancer" "lb-1" {
+      + created_at          = (known after apply)
+      + deletion_protection = (known after apply)
+      + folder_id           = (known after apply)
+      + id                  = (known after apply)
+      + name                = "lb1"
+      + region_id           = (known after apply)
+      + type                = "external"
+
+      + attached_target_group {
+          + target_group_id = (known after apply)
+
+          + healthcheck {
+              + healthy_threshold   = 2
+              + interval            = 2
+              + name                = "http"
+              + timeout             = 1
+              + unhealthy_threshold = 2
+
+              + http_options {
+                  + path = "/"
+                  + port = 80
+                }
+            }
+        }
+
+      + listener {
+          + name        = "my-list"
+          + port        = 80
+          + protocol    = (known after apply)
+          + target_port = (known after apply)
+
+          + external_address_spec {
+              + address    = (known after apply)
+              + ip_version = "ipv4"
+            }
+        }
+    }
+
+  # yandex_lb_target_group.target-1 will be created
+  + resource "yandex_lb_target_group" "target-1" {
+      + created_at = (known after apply)
+      + folder_id  = (known after apply)
+      + id         = (known after apply)
+      + name       = "target1"
+      + region_id  = (known after apply)
+
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "yandex_vpc_subnet.subnet-1.id"
+        }
+      + target {
+          + address   = (known after apply)
+          + subnet_id = "yandex_vpc_subnet.subnet-1.id"
+        }
+    }
+
+  # yandex_vpc_network.network-1 will be created
+  + resource "yandex_vpc_network" "network-1" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "network1"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.subnet-1 will be created
+  + resource "yandex_vpc_subnet" "subnet-1" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "subnet1"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "192.168.10.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = (known after apply)
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + internal-vm-1 = (known after apply)
+  + internal-vm-2 = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.network-1: Creating...
+╷
+│ Error: Error while requesting API to create network: server-request-id = 67b57f38-d80e-4dc4-b952-c8c1e7e06c68 server-trace-id = 7bd256b0af2e5a50:f4854b775ecd591:7bd256b0af2e5a50:1 client-request-id = f7dc022e-5b71-4a84-8e5b-e31a2d19b64d client-trace-id = 265e3148-e553-490f-b471-277392daed45 rpc error: code = ResourceExhausted desc = Quota limit vpc.networks.count exceeded
+│
+│   with yandex_vpc_network.network-1,
+│   on main.tf line 49, in resource "yandex_vpc_network" "network-1":
+│   49: resource "yandex_vpc_network" "network-1" {
+│
+╵
