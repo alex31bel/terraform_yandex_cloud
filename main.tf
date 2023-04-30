@@ -20,7 +20,7 @@ resource "yandex_compute_instance" "vm" {
   platform_id = "standard-v3"
 
   resources {
-    cores  = "1"
+    cores  = "2"
     memory = "2"
     core_fraction = "20"
   }
