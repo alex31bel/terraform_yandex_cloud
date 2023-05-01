@@ -99,6 +99,7 @@ resource "yandex_lb_network_load_balancer" "lb-1" {
       }
     }
   }
+}
 
 resource "yandex_vpc_network" "network-1" {
   name = "network1"
