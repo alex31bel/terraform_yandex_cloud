@@ -45,7 +45,6 @@ resource "yandex_compute_instance_group" "ig-1" {
     }
 
     network_interface {
-      network_id = "${yandex_vpc_network.network-1.id}"
       subnet_ids = "${yandex_vpc_subnet.subnet-1.id}"
       nat = true
     }
