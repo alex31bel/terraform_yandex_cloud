@@ -14,8 +14,8 @@ provider "yandex" {
 }
 
 resource "yandex_iam_service_account" "ig-sa" {
-  name        = "mashkovad"
-  description = "service account to manage mashkovad"
+  name        = "mashkov"
+  description = "service account to manage mashkov"
 }
 
 resource "yandex_resourcemanager_folder_iam_member" "editor" {
